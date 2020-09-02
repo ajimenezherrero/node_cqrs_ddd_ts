@@ -6,8 +6,8 @@ npm-debug.log*
 # Dependency directories
 node_modules/
 
-# Dist directory
-dist/
+# Build directory
+build/
 
 # Data directory
 data/

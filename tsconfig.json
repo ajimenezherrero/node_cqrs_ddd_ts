@@ -3,6 +3,7 @@
     "target": "es5",
     "module": "commonjs",
     "lib": ["es6"],
+    "types": ["node", "reflect-metadata"],
     "allowJs": true,
     "outDir": "build",
     "rootDir": "src",
@@ -11,6 +12,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }
