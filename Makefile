@@ -19,9 +19,8 @@ COLOR_LIGHT_GRAY := \033[0;37m
 include .env
 
 help: ## This help dialog.
-	@echo ""
-	@echo "$(COLOR_GREEN)Environment configuration:$(COLOR_NC)\n"
-	@echo "$(COLOR_BROWN)APP_ENV $(COLOR_PURPLE)-> $(COLOR_LIGHT_GRAY)$(APP_ENV)$(COLOR_NC)\n"	
+	@echo "\n$(COLOR_GREEN)Environment configuration:$(COLOR_NC)\n"
+	@echo "$(COLOR_BROWN)NODE_ENV $(COLOR_PURPLE)-> $(COLOR_LIGHT_GRAY)$(NODE_ENV)$(COLOR_NC)\n"	
 	@IFS=$$'\n' ; \
     help_lines=(`fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//'`); \
     for help_line in $${help_lines[@]}; do \
@@ -34,7 +33,13 @@ help: ## This help dialog.
 .PHONY: help
 
 install: ## Installs all dependencies (docker for mac should be preinstalled)
+	make create-docker-network
+	make build
 .PHONY: install
+
+build: ## Builds the docker image
+	docker-compose up -d --build
+.PHONY: build
 
 start: ## Starts the application
 .PHONY: start
@@ -45,5 +50,14 @@ restart: ## Restarts the application
 test: ## Run tests for the file passed as parameter or the entire suite if none passed.
 .PHONY: test
 
-init: # Init app
+init: ## Init app
 .PHONY: init
+
+## -------
+## Utils
+## -------
+
+create-docker-network: ## Creates the docker network
+	@echo "$(COLOR_GREEN)Creating kukku bukku network$(COLOR_NC)\n"
+	docker network create kukku-bukku-network
+.PHONY: create-docker-network
