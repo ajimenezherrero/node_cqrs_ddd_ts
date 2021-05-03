@@ -6,7 +6,7 @@ WORKDIR ${HOME}
 COPY package.json tsconfig.json ${HOME}/
 
 FROM base AS dependencies
-COPY package-lock.json ${HOME}/
+COPY yarn.lock ${HOME}/
 RUN yarn install --production
 RUN cp -R node_modules prod_node_modules
 RUN yarn install --production=false

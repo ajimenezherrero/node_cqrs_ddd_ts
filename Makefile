@@ -33,7 +33,7 @@ help: ## This help dialog.
 .PHONY: help
 
 install: ## Installs all dependencies (docker for mac should be preinstalled)
-	# make create-docker-network
+	make create-docker-network
 	make build
 .PHONY: install
 
@@ -42,6 +42,7 @@ build: ## Builds the docker image
 .PHONY: build
 
 start: ## Starts the application
+	docker-compose up
 .PHONY: start
 
 restart: ## Restarts the application
@@ -57,7 +58,11 @@ init: ## Init app
 ## Utils
 ## -------
 
-create-docker-network: ## Creates the docker network
-	@echo "$(COLOR_GREEN)Creating kukku bukku network$(COLOR_NC)\n"
-	docker network create kukku-bukku-network
+create-docker-network: ## Creates the docker network	
+	@if [ "$(shell docker network ls | grep kukku-bukku-network)" = "" ]; then \
+		echo "Creating kukku-bukku-network network"; \
+		docker network create kukku-bukku-network; \
+	else \
+		echo "Kukku-bukku-network network already exists, skipping creation"; \
+	fi
 .PHONY: create-docker-network
