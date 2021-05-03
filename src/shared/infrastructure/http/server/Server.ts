@@ -1,10 +1,5 @@
-
-
-interface App {
-  use(): void;
-  listen(port: Number): void;
-}
-export interface Server {
-  app: App;
+interface Server {
   start(): void;
 }
+
+export default Server;

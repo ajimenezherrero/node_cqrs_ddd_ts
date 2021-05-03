@@ -1,5 +1,4 @@
 class MessageBusError extends Error {
-  name: string = 'MessageBusError';
   options: object;
 
   constructor(message: string, options = {}) {

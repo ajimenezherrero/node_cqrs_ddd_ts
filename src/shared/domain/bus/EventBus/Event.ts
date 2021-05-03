@@ -4,5 +4,5 @@ export interface Event {
   eventId: Uuid;
   occurredOn: Date;
   eventName: string;
-  body: object;
+  body?: object;
 }
