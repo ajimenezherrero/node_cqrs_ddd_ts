@@ -3,9 +3,10 @@ ARG NODE_ENV
 ENV NODE_ENV ${NODE_ENV}
 ENV HOME /app
 WORKDIR ${HOME}
-COPY package.json tsconfig.json yarn.lock ${HOME}/
+COPY package.json tsconfig.json ${HOME}/
 
 FROM base AS dependencies
+COPY yarn.lock ${HOME}/
 RUN yarn install --production
 RUN cp -R node_modules prod_node_modules
 RUN yarn install --production=false
