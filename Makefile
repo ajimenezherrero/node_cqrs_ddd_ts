@@ -33,7 +33,7 @@ help: ## This help dialog.
 .PHONY: help
 
 install: ## Installs all dependencies (docker for mac should be preinstalled)
-	make create-docker-network
+	# make create-docker-network
 	make build
 .PHONY: install
 
