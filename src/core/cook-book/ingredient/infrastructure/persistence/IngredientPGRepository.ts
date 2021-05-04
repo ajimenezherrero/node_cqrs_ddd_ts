@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { IngredientRepository } from "../../domain/IngredientRepository";
 import { Ingredient } from "../../domain/Ingredient";
 import { Uuid } from "../../../../../shared/domain/value-objects/Uuid";
-import { BootstrapTypes } from "../../../../../shared/infrastructure/bootstrap/BootstrapTypes";
+import { BootstrapTypes } from "../../../../../types";
 import { Postgresql } from "../../../../../shared/infrastructure/persistence/Postgres/Postgresql";
 import { Logger } from "../../../../../shared/infrastructure/logger/Logger";
 

@@ -28,14 +28,14 @@ class ApiRest {
       next(new Error('Force Error'));
     });
   }
-  
+
   start() {
     this.initRoutes();
 
     this.server.listen(this.config.applications.backoffice.port, () => {
       this.logger.info(`Application server listen on port ${this.config.applications.backoffice.port}...`);
       this.logger.info('= = = = = = = = = = = = = = = = = = = = =');
-    });  
+    });
   }
 }
 

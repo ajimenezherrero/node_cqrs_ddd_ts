@@ -4,7 +4,7 @@ import { Router } from "express";
 import Controller from "./../../../shared/infrastructure/controller";
 import Server from "./../../../shared/infrastructure/http/server/Server";
 import PublicApi from "./";
-import PublicApiTypes from "./types";
+import { PublicApiTypes } from "../../../types";
 import IngredientController from "./controllers/ingredient";
 import IngredientRouter from "./routers/ingredient";
 

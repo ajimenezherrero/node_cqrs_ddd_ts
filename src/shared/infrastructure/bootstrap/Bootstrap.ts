@@ -2,7 +2,7 @@ import { Container, ContainerModule, interfaces } from "inversify";
 import { configuration, Config } from "../configuration/Config";
 import { Logger } from "../logger/Logger";
 import WinstonLogger from "../logger/WinstonLogger";
-import { BootstrapTypes } from "./BootstrapTypes";
+import { BootstrapTypes } from "../../../types";
 import { Postgresql } from "../persistence/Postgres/Postgresql";
 import { InMemoryCommandBus } from "../bus/Command/InMemoryCommandBus";
 import { InMemoryQueryBus } from "../bus/Query/InMemoryQueryBus";

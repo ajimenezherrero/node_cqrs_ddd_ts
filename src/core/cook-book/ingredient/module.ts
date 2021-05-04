@@ -7,16 +7,15 @@ import { GetIngredientUseCase } from "./application/Read/GetIngredientUseCase";
 import { UseCase } from "../../../shared/domain/UseCase";
 import { Query } from "../../../shared/domain/bus/Query/Query";
 import { QueryBus } from "../../../shared/domain/bus/Query/QueryBus";
-import { BootstrapTypes } from "../../../shared/infrastructure/bootstrap/BootstrapTypes";
 
-import { types } from "./types";
+import { BootstrapTypes, CoreIngredientTypes } from "../../../types";
 
 @injectable()
 export class Module {
   queryBus: QueryBus;
   getIngredientHandler: QueryHandler;
 
-  constructor(@inject(BootstrapTypes.QueryBus) queryBus: QueryBus, @inject(types.getIngredientQueryHandler) handler: QueryHandler) {
+  constructor(@inject(BootstrapTypes.QueryBus) queryBus: QueryBus, @inject(CoreIngredientTypes.getIngredientQueryHandler) handler: QueryHandler) {
     this.queryBus = queryBus;
     this.getIngredientHandler = handler;
   }
@@ -24,13 +23,13 @@ export class Module {
   init() {
     this.queryBus.bus.addSubscriber(this.getIngredientHandler);
   }
-} 
+}
 
 const containerModule = new ContainerModule((bind: interfaces.Bind) => {
-  bind<any>(types.ingredientModule).to(Module);
-  bind<IngredientRepository>(types.ingredientRepository).to(IngredientPGRepository);
-  bind<QueryHandler>(types.getIngredientQueryHandler).to(GetIngredientQueryHandler);
-  bind<UseCase<Query, any>>(types.getIngredientUseCase).to(GetIngredientUseCase);
+  bind<any>(CoreIngredientTypes.ingredientModule).to(Module);
+  bind<IngredientRepository>(CoreIngredientTypes.ingredientRepository).to(IngredientPGRepository);
+  bind<QueryHandler>(CoreIngredientTypes.getIngredientQueryHandler).to(GetIngredientQueryHandler);
+  bind<UseCase<Query, any>>(CoreIngredientTypes.getIngredientUseCase).to(GetIngredientUseCase);
 });
 
 export default containerModule;

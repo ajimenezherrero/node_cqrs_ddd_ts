@@ -2,11 +2,11 @@ import { injectable, inject } from "inversify";
 import express from "express";
 
 import PublicApiContainer from "./module";
-import PublicApiTypes from "./types";
+
+import { BootstrapTypes, PublicApiTypes } from "../../../types";
 
 import { Config } from "../../../shared/infrastructure/configuration/Config";
 import { Logger } from "../../../shared/infrastructure/logger/Logger";
-import { BootstrapTypes } from "../../../shared/infrastructure/bootstrap/BootstrapTypes";
 
 @injectable()
 class PublicApi {
@@ -48,4 +48,4 @@ class PublicApi {
 
 export default PublicApi;
 
-export { PublicApiTypes, PublicApiContainer };
+export { PublicApiContainer };

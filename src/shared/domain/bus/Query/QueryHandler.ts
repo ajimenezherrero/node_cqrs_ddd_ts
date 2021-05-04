@@ -1,3 +1,3 @@
 import { Subscriber } from "../EventBus/Subscriber";
 
-export interface QueryHandler extends Subscriber {};
+export type QueryHandler = Subscriber;

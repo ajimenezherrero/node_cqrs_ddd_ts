@@ -4,7 +4,7 @@ import { QueryHandler } from "../../../../../shared/domain/bus/Query/QueryHandle
 import { Uuid } from "../../../../../shared/domain/value-objects/Uuid";
 import { GetIngredientQuery } from "./GetIngredientQuery";
 
-import { types } from "../../types";
+import { CoreIngredientTypes } from "../../../../../types";
 import { UseCase } from "../../../../../shared/domain/UseCase";
 import { Query } from "../../../../../shared/domain/bus/Query/Query";
 
@@ -14,7 +14,7 @@ export class GetIngredientQueryHandler implements QueryHandler {
   topic = "GetIngredientQuery";
   private useCase: UseCase<Query, any>;
 
-  constructor(@inject(types.getIngredientUseCase) useCase: UseCase<Query, any>) {
+  constructor(@inject(CoreIngredientTypes.getIngredientUseCase) useCase: UseCase<Query, any>) {
     this.useCase = useCase;
     this.id = new Uuid().toString();
   }

@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import { Pool } from "pg";
 import { Logger } from "../../logger/Logger";
-import { BootstrapTypes } from "../../bootstrap/BootstrapTypes";
+import { BootstrapTypes } from "../../../../types";
 import { Config } from "../../configuration/Config";
 
 @injectable()
