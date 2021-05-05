@@ -13,7 +13,7 @@ class ApiRest {
     this.logger = logger;
   }
 
-  initRoutes() {
+  initRoutes(): void {
     this.server.get('/', (req, res, next) => {
       res.send('Backoffice is running...');
       next();
@@ -29,7 +29,7 @@ class ApiRest {
     });
   }
 
-  start() {
+  start(): void {
     this.initRoutes();
 
     this.server.listen(this.config.applications.backoffice.port, () => {

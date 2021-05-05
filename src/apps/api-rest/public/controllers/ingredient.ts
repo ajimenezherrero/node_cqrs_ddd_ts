@@ -1,11 +1,12 @@
-import { inject, injectable } from "inversify";
-import { Request, Response, NextFunction } from "express";
+import { inject, injectable } from 'inversify';
+import { Request, Response } from 'express';
 
-import { QueryBus } from "../../../../shared/domain/bus/Query/QueryBus";
-import Controller from "../../../../shared/domain/Controller";
-import { BootstrapTypes } from "../../../../types";
-import { GetIngredientQuery } from "../../../../core/cook-book/ingredient/application/Read/GetIngredientQuery";
-import { Uuid } from "../../../../shared/domain/value-objects/Uuid";
+import { QueryBus } from '../../../../shared/domain/bus/Query/QueryBus';
+import Controller from '../../../../shared/domain/Controller';
+import { BootstrapTypes } from '../../../../types';
+import { GetIngredientQuery } from '../../../../core/cook-book/ingredient/application/Read/GetIngredientQuery';
+import { Uuid } from '../../../../shared/domain/value-objects/Uuid';
+import { Ingredient } from '../../../../core/cook-book/ingredient/domain/Ingredient';
 
 @injectable()
 class IngredientController implements Controller {
@@ -14,29 +15,29 @@ class IngredientController implements Controller {
     this.queryBus = queryBus;
   }
 
-  show = async (req: Request, res: Response, _: NextFunction) => {
+  show = async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     const query = new GetIngredientQuery(new Uuid(id));
 
-    const response = await this.queryBus.ask(query);
+    const ingredient = (await this.queryBus.ask(query)) as Ingredient;
 
-    res.json(response);
+    res.json(ingredient.responseView());
   };
 
-  create() {
-    throw new Error("Method not implemented.");
+  create(): void {
+    throw new Error('Method not implemented.');
   }
 
-  list() {
-    throw new Error("Method not implemented.");
+  list(): void {
+    throw new Error('Method not implemented.');
   }
 
-  update() {
-    throw new Error("Method not implemented.");
+  update(): void {
+    throw new Error('Method not implemented.');
   }
 
-  delete() {
-    throw new Error("Method not implemented.");
+  delete(): void {
+    throw new Error('Method not implemented.');
   }
 }
 

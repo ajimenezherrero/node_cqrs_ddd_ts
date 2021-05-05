@@ -3,7 +3,7 @@ ARG NODE_ENV
 ENV NODE_ENV ${NODE_ENV}
 ENV HOME /app
 WORKDIR ${HOME}
-COPY package.json tsconfig.json tslint.json entrypoint.sh ${HOME}/
+COPY package.json tsconfig.json entrypoint.sh ${HOME}/
 COPY migrations/database.json ${HOME}/
 COPY migrations/ ${HOME}/migrations
 

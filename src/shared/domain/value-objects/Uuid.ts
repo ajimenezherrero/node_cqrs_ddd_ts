@@ -11,7 +11,7 @@ export class Uuid {
     return new Uuid(uuidv4());
   }
 
-  isValidUuid(uuid: string) {
+  isValidUuid(uuid: string): void {
     if (!validate(uuid)) {
       throw new Error('Invalid uuid');
     }
@@ -21,4 +21,3 @@ export class Uuid {
     return this.value;
   }
 }
-

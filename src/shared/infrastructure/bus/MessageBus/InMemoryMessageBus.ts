@@ -1,8 +1,8 @@
-import { EventBus } from "../../../domain/bus/EventBus/EventBus";
-import { Subscriber } from "../../../domain/bus/EventBus/Subscriber";
-import { Event } from "../../../domain/bus/EventBus/Event";
+import { EventBus } from '../../../domain/bus/EventBus/EventBus';
+import { Subscriber } from '../../../domain/bus/EventBus/Subscriber';
+import { Event } from '../../../domain/bus/EventBus/Event';
 
-import MessageBusError from "./MessageBusError";
+import MessageBusError from './MessageBusError';
 
 export class InMemoryMessageBus implements EventBus {
   subscribers: Map<string, Subscriber>;
@@ -11,7 +11,7 @@ export class InMemoryMessageBus implements EventBus {
     this.subscribers = new Map<string, Subscriber>();
   }
 
-  dispatch(event: Event) {
+  dispatch(event: Event): void {
     const useCase = this.subscribers.get(event.eventName);
 
     if (useCase) {
@@ -21,15 +21,15 @@ export class InMemoryMessageBus implements EventBus {
     }
   }
 
-  addSubscriber(subscriber: Subscriber) {
+  addSubscriber(subscriber: Subscriber): void {
     this.subscribers.set(subscriber.topic, subscriber);
   }
 
-  removeSubscriber(subscriber: Subscriber) {
+  removeSubscriber(subscriber: Subscriber): void {
     this.subscribers.delete(subscriber.id);
   }
 
-  listSubscribers() {
+  listSubscribers(): Map<string, Subscriber> {
     return this.subscribers;
   }
 }

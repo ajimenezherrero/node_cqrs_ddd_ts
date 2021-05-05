@@ -1,23 +1,20 @@
-import winston from "winston";
+import winston from 'winston';
 
 class WinstonLogger {
-  instance: any;
-  loggerLevel: string = "debug";
+  instance?: winston.Logger;
+  loggerLevel = 'debug';
 
   constructor(loggerLevel: string) {
     this.loggerLevel = loggerLevel;
   }
 
-  get logger() {
+  get logger(): winston.Logger {
     if (!this.instance) {
       this.instance = winston.createLogger({
         level: this.loggerLevel,
         transports: [
           new winston.transports.Console({
-            format: winston.format.combine(
-              winston.format.colorize(),
-              winston.format.simple()
-            ),
+            format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
           }),
         ],
       });
