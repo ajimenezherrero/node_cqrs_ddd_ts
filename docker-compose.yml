@@ -12,8 +12,6 @@ services:
       - .env
     volumes:
       - ./src:/app/src
-    command: 
-      - development
     ports:
       - $APP_PORT:$APP_PORT
       - $BACKOFFICE_PORT:$BACKOFFICE_PORT
