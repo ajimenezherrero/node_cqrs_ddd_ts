@@ -38,11 +38,11 @@ install: ## Installs all dependencies (docker for mac should be preinstalled)
 .PHONY: install
 
 build: ## Builds the docker image
-	docker-compose up -d --build
+	docker-compose build
 .PHONY: build
 
 start: ## Starts the application
-	docker-compose up
+	docker-compose up --build
 .PHONY: start
 
 restart: ## Restarts the application
@@ -66,3 +66,7 @@ create-docker-network: ## Creates the docker network
 		echo "Kukku-bukku-network network already exists, skipping creation"; \
 	fi
 .PHONY: create-docker-network
+
+db-migrate: ## Update db schema.
+	docker-compose exec recipe-app yarn migrate:up
+.PHONY: db-migrate

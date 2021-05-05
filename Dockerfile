@@ -3,7 +3,9 @@ ARG NODE_ENV
 ENV NODE_ENV ${NODE_ENV}
 ENV HOME /app
 WORKDIR ${HOME}
-COPY package.json tsconfig.json ${HOME}/
+COPY package.json tsconfig.json tslint.json entrypoint.sh ${HOME}/
+COPY migrations/database.json ${HOME}/
+COPY migrations/ ${HOME}/migrations
 
 FROM base AS dependencies
 COPY yarn.lock ${HOME}/
@@ -13,8 +15,7 @@ RUN yarn install --production=false
 COPY src/ ${HOME}/src
 
 FROM dependencies AS development
-RUN npm install -g nodemon
-CMD nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts
+ENTRYPOINT ["./entrypoint.sh", "development"]
 
 FROM dependencies AS builder
 RUN yarn build
@@ -22,4 +23,4 @@ RUN yarn build
 FROM base AS release
 COPY --from=builder /app/build ./build
 COPY --from=builder /app/prod_node_modules ./node_modules
-CMD yarn serve
+ENTRYPOINT ["./entrypoint.sh", "production"]
