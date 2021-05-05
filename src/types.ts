@@ -10,6 +10,7 @@ export const CoreIngredientTypes = {
   ingredientModule: Symbol.for("ingredientModule"),
   ingredientRepository: Symbol.for("ingredientRepository"),
   getIngredientQueryHandler: Symbol.for("getIngredientQueryHandler"),
+  ingredientHandlers: Symbol.for("ingredientHandlers"),
   getIngredientUseCase: Symbol.for("getIngredientUseCase"),
 }
 

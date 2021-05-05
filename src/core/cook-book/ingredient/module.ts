@@ -13,22 +13,31 @@ import { BootstrapTypes, CoreIngredientTypes } from "../../../types";
 @injectable()
 export class Module {
   queryBus: QueryBus;
-  getIngredientHandler: QueryHandler;
+  queryHandlers: Array<QueryHandler>;
 
-  constructor(@inject(BootstrapTypes.QueryBus) queryBus: QueryBus, @inject(CoreIngredientTypes.getIngredientQueryHandler) handler: QueryHandler) {
+  constructor(@inject(BootstrapTypes.QueryBus) queryBus: QueryBus, @inject(CoreIngredientTypes.ingredientHandlers) queryHandlers: Array<QueryHandler>) {
     this.queryBus = queryBus;
-    this.getIngredientHandler = handler;
+    this.queryHandlers = queryHandlers;
   }
 
   init() {
-    this.queryBus.bus.addSubscriber(this.getIngredientHandler);
+    this.queryHandlers.forEach(queryHandler => {
+      this.queryBus.bus.addSubscriber(queryHandler);
+    })
   }
+}
+
+const handlers = (context: interfaces.Context): Array<QueryHandler> => {
+  return [
+    context.container.get<QueryHandler>(CoreIngredientTypes.getIngredientQueryHandler)
+  ];
 }
 
 const containerModule = new ContainerModule((bind: interfaces.Bind) => {
   bind<any>(CoreIngredientTypes.ingredientModule).to(Module);
   bind<IngredientRepository>(CoreIngredientTypes.ingredientRepository).to(IngredientPGRepository);
   bind<QueryHandler>(CoreIngredientTypes.getIngredientQueryHandler).to(GetIngredientQueryHandler);
+  bind<Array<QueryHandler>>(CoreIngredientTypes.ingredientHandlers).toDynamicValue(handlers);
   bind<UseCase<Query, any>>(CoreIngredientTypes.getIngredientUseCase).to(GetIngredientUseCase);
 });
 
