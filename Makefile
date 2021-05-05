@@ -66,3 +66,7 @@ create-docker-network: ## Creates the docker network
 		echo "Kukku-bukku-network network already exists, skipping creation"; \
 	fi
 .PHONY: create-docker-network
+
+db-migrate: ## Update db schema.
+	docker-compose exec recipe-app yarn migrate:up
+.PHONY: db-migrate
