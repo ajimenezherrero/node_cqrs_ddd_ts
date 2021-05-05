@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { inject, injectable } from "inversify";
 
-import Controller from "../../../../shared/infrastructure/controller";
+import Controller from "../../../../shared/domain/Controller";
 import { PublicApiTypes } from "../../../../types";
 
 @injectable()

@@ -9,9 +9,10 @@ import { Query } from "../../../shared/domain/bus/Query/Query";
 import { QueryBus } from "../../../shared/domain/bus/Query/QueryBus";
 
 import { BootstrapTypes, CoreIngredientTypes } from "../../../types";
+import { Module } from "../../../shared/domain/Module";
 
 @injectable()
-export class Module {
+export class IngredientModule implements Module {
   queryBus: QueryBus;
   queryHandlers: Array<QueryHandler>;
 
@@ -34,7 +35,7 @@ const handlers = (context: interfaces.Context): Array<QueryHandler> => {
 }
 
 const containerModule = new ContainerModule((bind: interfaces.Bind) => {
-  bind<any>(CoreIngredientTypes.ingredientModule).to(Module);
+  bind<Module>(CoreIngredientTypes.ingredientModule).to(IngredientModule);
   bind<IngredientRepository>(CoreIngredientTypes.ingredientRepository).to(IngredientPGRepository);
   bind<QueryHandler>(CoreIngredientTypes.getIngredientQueryHandler).to(GetIngredientQueryHandler);
   bind<Array<QueryHandler>>(CoreIngredientTypes.ingredientHandlers).toDynamicValue(handlers);

@@ -1,8 +1,8 @@
 import { ContainerModule, interfaces } from "inversify";
 import { Router } from "express";
 
-import Controller from "./../../../shared/infrastructure/controller";
-import Server from "./../../../shared/infrastructure/http/server/Server";
+import Controller from "../../../shared/domain/Controller";
+import Server from "../../../shared/domain/Server";
 import PublicApi from "./";
 import { PublicApiTypes } from "../../../types";
 import IngredientController from "./controllers/ingredient";

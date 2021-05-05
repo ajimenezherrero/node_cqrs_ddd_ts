@@ -7,9 +7,10 @@ import { BootstrapTypes, PublicApiTypes } from "../../../types";
 
 import { Config } from "../../../shared/infrastructure/configuration/Config";
 import { Logger } from "../../../shared/infrastructure/logger/Logger";
+import Server from "../../../shared/domain/Server";
 
 @injectable()
-class PublicApi {
+class PublicApi implements Server{
   server: express.Express;
   config: Config;
   logger: Logger;

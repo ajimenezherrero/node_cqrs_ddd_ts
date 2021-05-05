@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 import { Request, Response, NextFunction } from "express";
 
 import { QueryBus } from "../../../../shared/domain/bus/Query/QueryBus";
-import Controller from "../../../../shared/infrastructure/controller";
+import Controller from "../../../../shared/domain/Controller";
 import { BootstrapTypes } from "../../../../types";
 import { GetIngredientQuery } from "../../../../core/cook-book/ingredient/application/Read/GetIngredientQuery";
 import { Uuid } from "../../../../shared/domain/value-objects/Uuid";
