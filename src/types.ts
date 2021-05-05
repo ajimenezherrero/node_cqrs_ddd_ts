@@ -10,8 +10,11 @@ export const CoreIngredientTypes = {
   ingredientModule: Symbol.for('ingredientModule'),
   ingredientRepository: Symbol.for('ingredientRepository'),
   getIngredientQueryHandler: Symbol.for('getIngredientQueryHandler'),
-  ingredientHandlers: Symbol.for('ingredientHandlers'),
+  createIngredientCommandHandler: Symbol.for('createIngredientCommandHandler'),
+  ingredientQueryHandlers: Symbol.for('ingredientQueryHandlers'),
+  ingredientCommandHandlers: Symbol.for('ingredientCommandHandlers'),
   getIngredientUseCase: Symbol.for('getIngredientUseCase'),
+  createIngredientUseCase: Symbol.for('createIngredientUseCase'),
 };
 
 export const PublicApiTypes = {

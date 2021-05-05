@@ -1,7 +1,7 @@
 import { Query } from './Query';
-import { EventBus } from '../EventBus/EventBus';
+import { Subscriber } from '../EventBus/Subscriber';
 
 export interface QueryBus {
-  bus: EventBus;
   ask(Query: Query): unknown;
+  addSubscriber(subscriber: Subscriber): void;
 }

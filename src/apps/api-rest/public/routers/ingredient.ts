@@ -14,6 +14,7 @@ class IngredientRouter {
   ) {
     this.router = Router();
 
+    this.router.post('/', controller.create);
     this.router.get('/:id', controller.show);
   }
 }

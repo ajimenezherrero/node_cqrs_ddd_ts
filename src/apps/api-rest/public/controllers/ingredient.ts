@@ -7,12 +7,19 @@ import { BootstrapTypes } from '../../../../types';
 import { GetIngredientQuery } from '../../../../core/cook-book/ingredient/application/Read/GetIngredientQuery';
 import { Uuid } from '../../../../shared/domain/value-objects/Uuid';
 import { Ingredient } from '../../../../core/cook-book/ingredient/domain/Ingredient';
+import { CreateIngredientCommand } from '../../../../core/cook-book/ingredient/application/Create/CreateIngredientCommand';
+import { CommandBus } from '../../../../shared/domain/bus/Command/CommandBus';
 
 @injectable()
 class IngredientController implements Controller {
   queryBus: QueryBus;
-  constructor(@inject(BootstrapTypes.QueryBus) queryBus: QueryBus) {
+  commandBus: CommandBus;
+  constructor(
+    @inject(BootstrapTypes.QueryBus) queryBus: QueryBus,
+    @inject(BootstrapTypes.CommandBus) commandBus: CommandBus,
+  ) {
     this.queryBus = queryBus;
+    this.commandBus = commandBus;
   }
 
   show = async (req: Request, res: Response): Promise<void> => {
@@ -24,9 +31,13 @@ class IngredientController implements Controller {
     res.json(ingredient.responseView());
   };
 
-  create(): void {
-    throw new Error('Method not implemented.');
-  }
+  create = (req: Request, res: Response): void => {
+    const command = new CreateIngredientCommand(req.body);
+
+    this.commandBus.dispatch(command);
+
+    res.status(202).end();
+  };
 
   list(): void {
     throw new Error('Method not implemented.');

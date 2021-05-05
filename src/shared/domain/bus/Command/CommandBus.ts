@@ -1,7 +1,7 @@
 import { Command } from './Command';
-import { EventBus } from '../EventBus/EventBus';
+import { Subscriber } from '../EventBus/Subscriber';
 
 export interface CommandBus {
-  bus: EventBus;
   dispatch(command: Command): void;
+  addSubscriber(subscriber: Subscriber): void;
 }
