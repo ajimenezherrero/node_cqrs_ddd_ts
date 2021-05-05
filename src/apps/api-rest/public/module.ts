@@ -18,7 +18,7 @@ const module = new ContainerModule((bind: interfaces.Bind) => {
         context.container.get<IngredientController>(
           PublicApiTypes.ingredientController
         )
-      ).Router
+      ).router
   );
   bind<Server>(PublicApiTypes.publicApi).to(PublicApi);
 });

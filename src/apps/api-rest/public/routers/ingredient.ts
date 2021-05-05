@@ -16,10 +16,6 @@ class IngredientRouter {
 
     this.router.get("/:id", controller.show);
   }
-
-  get Router() {
-    return this.router;
-  }
 }
 
 export default IngredientRouter;
