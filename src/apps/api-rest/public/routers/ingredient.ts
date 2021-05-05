@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { inject, injectable } from "inversify";
+import { Router } from 'express';
+import { inject, injectable } from 'inversify';
 
-import Controller from "../../../../shared/domain/Controller";
-import { PublicApiTypes } from "../../../../types";
+import Controller from '../../../../shared/domain/Controller';
+import { PublicApiTypes } from '../../../../types';
 
 @injectable()
 class IngredientRouter {
@@ -10,11 +10,11 @@ class IngredientRouter {
 
   constructor(
     @inject(PublicApiTypes.ingredientController)
-    controller: Controller
+    controller: Controller,
   ) {
     this.router = Router();
 
-    this.router.get("/:id", controller.show);
+    this.router.get('/:id', controller.show);
   }
 }
 

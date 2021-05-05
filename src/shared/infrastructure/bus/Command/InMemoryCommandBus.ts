@@ -14,7 +14,7 @@ export class InMemoryCommandBus implements CommandBus {
   }
 
   addSubscriber(subscriber: Subscriber) {
-    this.bus.addSubscriber(subscriber)
+    this.bus.addSubscriber(subscriber);
   }
 
   dispatch(command: Command) {

@@ -1,9 +1,9 @@
-import { inject, injectable } from "inversify";
+import { inject, injectable } from 'inversify';
 
-import { UseCase } from "../../../../../shared/domain/UseCase";
-import { GetIngredientQuery } from "./GetIngredientQuery";
-import { IngredientRepository } from "../../domain/IngredientRepository";
-import { CoreIngredientTypes } from "../../../../../types";
+import { UseCase } from '../../../../../shared/domain/UseCase';
+import { GetIngredientQuery } from './GetIngredientQuery';
+import { IngredientRepository } from '../../domain/IngredientRepository';
+import { CoreIngredientTypes } from '../../../../../types';
 
 @injectable()
 export class GetIngredientUseCase implements UseCase<GetIngredientQuery, any> {

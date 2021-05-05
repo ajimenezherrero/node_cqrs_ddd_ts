@@ -1,4 +1,4 @@
-import { Handler } from "express";
+import { Handler } from 'express';
 
 export default interface Controller {
   create: Handler;

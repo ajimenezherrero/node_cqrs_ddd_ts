@@ -1,17 +1,17 @@
-import { inject, injectable } from "inversify";
+import { inject, injectable } from 'inversify';
 
-import { QueryHandler } from "../../../../../shared/domain/bus/Query/QueryHandler";
-import { Uuid } from "../../../../../shared/domain/value-objects/Uuid";
-import { GetIngredientQuery } from "./GetIngredientQuery";
+import { QueryHandler } from '../../../../../shared/domain/bus/Query/QueryHandler';
+import { Uuid } from '../../../../../shared/domain/value-objects/Uuid';
+import { GetIngredientQuery } from './GetIngredientQuery';
 
-import { CoreIngredientTypes } from "../../../../../types";
-import { UseCase } from "../../../../../shared/domain/UseCase";
-import { Query } from "../../../../../shared/domain/bus/Query/Query";
+import { CoreIngredientTypes } from '../../../../../types';
+import { UseCase } from '../../../../../shared/domain/UseCase';
+import { Query } from '../../../../../shared/domain/bus/Query/Query';
 
 @injectable()
 export class GetIngredientQueryHandler implements QueryHandler {
   id: string;
-  topic = "GetIngredientQuery";
+  topic = 'GetIngredientQuery';
   private useCase: UseCase<Query, any>;
 
   constructor(@inject(CoreIngredientTypes.getIngredientUseCase) useCase: UseCase<Query, any>) {

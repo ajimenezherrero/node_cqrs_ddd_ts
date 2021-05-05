@@ -1,10 +1,10 @@
-import { inject, injectable } from "inversify";
-import { IngredientRepository } from "../../domain/IngredientRepository";
-import { Ingredient } from "../../domain/Ingredient";
-import { Uuid } from "../../../../../shared/domain/value-objects/Uuid";
-import { BootstrapTypes } from "../../../../../types";
-import { Postgresql } from "../../../../../shared/infrastructure/persistence/Postgres/Postgresql";
-import { Logger } from "../../../../../shared/infrastructure/logger/Logger";
+import { inject, injectable } from 'inversify';
+import { IngredientRepository } from '../../domain/IngredientRepository';
+import { Ingredient } from '../../domain/Ingredient';
+import { Uuid } from '../../../../../shared/domain/value-objects/Uuid';
+import { BootstrapTypes } from '../../../../../types';
+import { Postgresql } from '../../../../../shared/infrastructure/persistence/Postgres/Postgresql';
+import { Logger } from '../../../../../shared/infrastructure/logger/Logger';
 
 @injectable()
 export class IngredientPGRepository implements IngredientRepository {
@@ -19,13 +19,13 @@ export class IngredientPGRepository implements IngredientRepository {
   }
 
   save(ingredient: Ingredient): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   update(ingredient: Ingredient): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   delete(ingredientId: Uuid): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
   async findById(ingredientId: Uuid): Promise<Ingredient> {
     const query = `SELECT id, name, description FROM ingredient WHERE id = $1`;
@@ -36,6 +36,6 @@ export class IngredientPGRepository implements IngredientRepository {
     return new Ingredient({ name, description }, id);
   }
   findAll(): Ingredient[] {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 }

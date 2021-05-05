@@ -1,3 +1,3 @@
-import { Subscriber } from "../EventBus/Subscriber";
+import { Subscriber } from '../EventBus/Subscriber';
 
 export type QueryHandler = Subscriber;

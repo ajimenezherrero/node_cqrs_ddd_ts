@@ -1,5 +1,5 @@
-import { Uuid } from "../../../../shared/domain/value-objects/Uuid";
-import { AggregateRoot } from "../../../../shared/domain/AggregateRoot";
+import { Uuid } from '../../../../shared/domain/value-objects/Uuid';
+import { AggregateRoot } from '../../../../shared/domain/AggregateRoot';
 
 interface IngredientProps {
   name: string;

@@ -1,14 +1,14 @@
-import { ContainerModule, interfaces } from "inversify";
+import { ContainerModule, interfaces } from 'inversify';
 
-import { BootstrapTypes } from "../../../types";
-import { QueryBus } from "../../domain/bus/Query/QueryBus";
-import { CommandBus } from "../../domain/bus/Command/CommandBus";
-import { InMemoryCommandBus } from "../bus/Command/InMemoryCommandBus";
-import { InMemoryQueryBus } from "../bus/Query/InMemoryQueryBus";
-import { configuration, Config } from "../configuration/Config";
-import { Logger } from "../logger/Logger";
-import WinstonLogger from "../logger/WinstonLogger";
-import { Postgresql } from "../persistence/Postgres/Postgresql";
+import { BootstrapTypes } from '../../../types';
+import { QueryBus } from '../../domain/bus/Query/QueryBus';
+import { CommandBus } from '../../domain/bus/Command/CommandBus';
+import { InMemoryCommandBus } from '../bus/Command/InMemoryCommandBus';
+import { InMemoryQueryBus } from '../bus/Query/InMemoryQueryBus';
+import { configuration, Config } from '../configuration/Config';
+import { Logger } from '../logger/Logger';
+import WinstonLogger from '../logger/WinstonLogger';
+import { Postgresql } from '../persistence/Postgres/Postgresql';
 
 export class Bootstrap {
   container: ContainerModule;
@@ -24,8 +24,6 @@ export class Bootstrap {
   }
 
   initLogger(context: interfaces.Context) {
-    return new WinstonLogger(
-      context.container.get<Config>(BootstrapTypes.Config).loggerLevel
-    ).logger;
+    return new WinstonLogger(context.container.get<Config>(BootstrapTypes.Config).loggerLevel).logger;
   }
 }

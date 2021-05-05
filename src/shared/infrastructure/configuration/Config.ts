@@ -38,13 +38,13 @@ export const configuration: Config = {
       port: Number(BACKOFFICE_PORT),
     },
   },
-  loggerLevel: LOGGER_LEVEL || "",
+  loggerLevel: LOGGER_LEVEL || '',
   postgres: {
-    database: POSTGRES_DB || "",
-    host: POSTGRES_HOST || "postgres",
+    database: POSTGRES_DB || '',
+    host: POSTGRES_HOST || 'postgres',
     max: 10,
-    password: POSTGRES_PASSWORD || "",
+    password: POSTGRES_PASSWORD || '',
     port: Number(POSTGRES_PORT) || 5432,
-    user: POSTGRES_USER || "postgres",
+    user: POSTGRES_USER || 'postgres',
   },
 };

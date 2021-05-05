@@ -1,8 +1,8 @@
-import { EventBus } from "../../../domain/bus/EventBus/EventBus";
-import { Subscriber } from "../../../domain/bus/EventBus/Subscriber";
-import { Event } from "../../../domain/bus/EventBus/Event";
+import { EventBus } from '../../../domain/bus/EventBus/EventBus';
+import { Subscriber } from '../../../domain/bus/EventBus/Subscriber';
+import { Event } from '../../../domain/bus/EventBus/Event';
 
-import MessageBusError from "./MessageBusError";
+import MessageBusError from './MessageBusError';
 
 export class InMemoryMessageBus implements EventBus {
   subscribers: Map<string, Subscriber>;

@@ -21,4 +21,3 @@ export class Uuid {
     return this.value;
   }
 }
-

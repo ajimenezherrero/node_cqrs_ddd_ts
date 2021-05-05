@@ -1,9 +1,9 @@
-import { QueryBus } from "./bus/Query/QueryBus";
-import { QueryHandler } from "./bus/Query/QueryHandler";
+import { QueryBus } from './bus/Query/QueryBus';
+import { QueryHandler } from './bus/Query/QueryHandler';
 
 export interface Module {
   queryBus: QueryBus;
-  queryHandlers: Array<QueryHandler>;
+  queryHandlers: QueryHandler[];
 
   init(): void;
 }

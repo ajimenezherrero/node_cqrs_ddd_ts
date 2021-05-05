@@ -1,8 +1,8 @@
-import { inject, injectable } from "inversify";
-import { Pool } from "pg";
-import { Logger } from "../../logger/Logger";
-import { BootstrapTypes } from "../../../../types";
-import { Config } from "../../configuration/Config";
+import { inject, injectable } from 'inversify';
+import { Pool } from 'pg';
+import { Logger } from '../../logger/Logger';
+import { BootstrapTypes } from '../../../../types';
+import { Config } from '../../configuration/Config';
 
 @injectable()
 export class Postgresql {
@@ -10,19 +10,16 @@ export class Postgresql {
   configPg: object;
   poolInstance: any;
 
-  constructor(
-    @inject(BootstrapTypes.Logger) logger: Logger,
-    @inject(BootstrapTypes.Config) config: Config
-  ) {
+  constructor(@inject(BootstrapTypes.Logger) logger: Logger, @inject(BootstrapTypes.Config) config: Config) {
     this.logger = logger;
-    this.logger.info("Postgresql constructor");
+    this.logger.info('Postgresql constructor');
 
     this.configPg = config.postgres;
   }
 
   getPool() {
     if (!this.poolInstance) {
-      this.logger.info("Creating a Pool for Postgresql");
+      this.logger.info('Creating a Pool for Postgresql');
 
       this.poolInstance = new Pool(this.configPg);
     }

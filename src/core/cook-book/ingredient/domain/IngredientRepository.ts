@@ -1,5 +1,5 @@
-import { Ingredient } from "./Ingredient";
-import { Uuid } from "../../../../shared/domain/value-objects/Uuid";
+import { Ingredient } from './Ingredient';
+import { Uuid } from '../../../../shared/domain/value-objects/Uuid';
 
 export interface IngredientRepository {
   save(ingredient: Ingredient): Promise<void>;
