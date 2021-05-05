@@ -3,7 +3,8 @@ ARG NODE_ENV
 ENV NODE_ENV ${NODE_ENV}
 ENV HOME /app
 WORKDIR ${HOME}
-COPY package.json tsconfig.json ${HOME}/
+COPY package.json tsconfig.json database.json ${HOME}/
+COPY migrations/ ${HOME}/migrations
 
 FROM base AS dependencies
 COPY yarn.lock ${HOME}/

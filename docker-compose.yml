@@ -1,8 +1,9 @@
-version: '3.8'
+version: "3.8"
 
 services:
   recipe-app:
     container_name: recipe-app
+    image: recipe-app:${IMAGE_TAG:-latest}
     build:
       context: .
       target: $TARGET
@@ -18,6 +19,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      migration:
+        condition: service_completed_successfully
   db:
     container_name: recipe-app_db
     image: postgres:13.2-alpine
@@ -32,6 +35,18 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+  migration:
+    container_name: recipe-app_db_migration
+    image: recipe-app:${IMAGE_TAG:-latest}
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint:
+      - /bin/sh
+      - -c
+      - "yarn migrate:up -e default"
 
 networks:
   default:
