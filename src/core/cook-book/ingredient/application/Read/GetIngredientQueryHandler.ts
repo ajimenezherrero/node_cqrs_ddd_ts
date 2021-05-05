@@ -19,7 +19,7 @@ export class GetIngredientQueryHandler implements QueryHandler {
     this.id = new Uuid().toString();
   }
 
-  async handle(query: GetIngredientQuery) {
+  handle(query: GetIngredientQuery) {
     return this.useCase.execute(query);
   }
 }

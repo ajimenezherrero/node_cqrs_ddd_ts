@@ -1,13 +1,14 @@
-import { Container, ContainerModule, interfaces } from "inversify";
+import { ContainerModule, interfaces } from "inversify";
+
+import { BootstrapTypes } from "../../../types";
+import { QueryBus } from "../../domain/bus/Query/QueryBus";
+import { CommandBus } from "../../domain/bus/Command/CommandBus";
+import { InMemoryCommandBus } from "../bus/Command/InMemoryCommandBus";
+import { InMemoryQueryBus } from "../bus/Query/InMemoryQueryBus";
 import { configuration, Config } from "../configuration/Config";
 import { Logger } from "../logger/Logger";
 import WinstonLogger from "../logger/WinstonLogger";
-import { BootstrapTypes } from "../../../types";
 import { Postgresql } from "../persistence/Postgres/Postgresql";
-import { InMemoryCommandBus } from "../bus/Command/InMemoryCommandBus";
-import { InMemoryQueryBus } from "../bus/Query/InMemoryQueryBus";
-import { QueryBus } from "../../domain/bus/Query/QueryBus";
-import { CommandBus } from "../../domain/bus/Command/CommandBus";
 
 export class Bootstrap {
   container: ContainerModule;

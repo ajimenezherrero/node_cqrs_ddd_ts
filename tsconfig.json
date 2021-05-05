@@ -14,5 +14,11 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
-  }
+  },
+  "include":[ 
+    "src/**/*"
+  ],
+  "exclude":[ 
+      "node_modules"
+  ]
 }

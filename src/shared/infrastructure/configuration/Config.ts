@@ -1,6 +1,3 @@
-import { injectable } from "inversify";
-import "reflect-metadata";
-
 const {
   POSTGRES_USER,
   POSTGRES_HOST,

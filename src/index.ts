@@ -1,11 +1,10 @@
 import { Container } from "inversify";
+import "reflect-metadata";
 
-import { Bootstrap } from "./shared/infrastructure/bootstrap/Bootstrap";
 import { PublicApiContainer } from "./apps/api-rest/public";
 import IngredientModule from "./core/cook-book/ingredient/module";
-
+import { Bootstrap } from "./shared/infrastructure/bootstrap/Bootstrap";
 import Server from "./shared/infrastructure/http/server/Server";
-
 import { CoreIngredientTypes, PublicApiTypes } from './types';
 
 const start = async () => {

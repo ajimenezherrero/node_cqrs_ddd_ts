@@ -1,9 +1,10 @@
 import { injectable } from "inversify";
-import { QueryBus } from "../../../domain/bus/Query/QueryBus";
-import { Query } from "../../../domain/bus/Query/Query";
-import { InMemoryMessageBus as MessageBus } from "../MessageBus/InMemoryMessageBus";
+
 import { EventBus } from "../../../domain/bus/EventBus/EventBus";
 import { Subscriber } from "../../../domain/bus/EventBus/Subscriber";
+import { Query } from "../../../domain/bus/Query/Query";
+import { QueryBus } from "../../../domain/bus/Query/QueryBus";
+import { InMemoryMessageBus as MessageBus } from "../MessageBus/InMemoryMessageBus";
 
 @injectable()
 export class InMemoryQueryBus implements QueryBus {
