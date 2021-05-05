@@ -18,8 +18,10 @@ export class IngredientPGRepository implements IngredientRepository {
     this.postgres = postgres;
   }
 
-  save(): Promise<void> {
-    throw new Error('Method not implemented.');
+  save(ingredient: Ingredient): void {
+    const query = `INSERT INTO ingredient (id, name, description) VALUES($1, $2, $3)`;
+    const values = [ingredient.id.toString(), ingredient.name, ingredient.description];
+    this.postgres.query(query, values);
   }
   update(): Promise<void> {
     throw new Error('Method not implemented.');

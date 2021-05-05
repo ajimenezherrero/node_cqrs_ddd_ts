@@ -18,7 +18,7 @@ export class Bootstrap {
       bind<Config>(BootstrapTypes.Config).toConstantValue(configuration);
       bind<Logger>(BootstrapTypes.Logger).toDynamicValue(this.initLogger);
       bind<Postgresql>(BootstrapTypes.Postgres).to(Postgresql);
-      bind<CommandBus>(BootstrapTypes.CommandBus).to(InMemoryCommandBus);
+      bind<CommandBus>(BootstrapTypes.CommandBus).to(InMemoryCommandBus).inSingletonScope();
       bind<QueryBus>(BootstrapTypes.QueryBus).to(InMemoryQueryBus).inSingletonScope();
     });
   }

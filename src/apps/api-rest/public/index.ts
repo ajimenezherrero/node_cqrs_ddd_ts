@@ -36,6 +36,7 @@ class PublicApi implements Server {
   }
 
   start(): void {
+    this.server.use(express.json());
     this.initRoutes();
 
     this.server.listen(this.config.applications.apiRest.port, () => {
