@@ -1,12 +1,12 @@
 class MessageBusError extends Error {
-  options: object;
+  options: unknown;
 
   constructor(message: string, options = {}) {
     super(`Message Bus Error: ${message}`);
     this.options = options;
   }
 
-  get statusCode() {
+  get statusCode(): number {
     return 500;
   }
 }

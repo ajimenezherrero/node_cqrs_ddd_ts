@@ -27,15 +27,15 @@ class PublicApi implements Server {
     this.server = express();
   }
 
-  initRoutes() {
-    this.server.get('/', (req, res, next) => {
+  initRoutes(): void {
+    this.server.get('/', (req, res) => {
       res.send('Recipe App is running...').end();
     });
 
     this.server.use('/ingredients', this.router);
   }
 
-  start() {
+  start(): void {
     this.initRoutes();
 
     this.server.listen(this.config.applications.apiRest.port, () => {

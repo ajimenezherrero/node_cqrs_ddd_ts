@@ -7,20 +7,21 @@ import { GetIngredientQuery } from './GetIngredientQuery';
 import { CoreIngredientTypes } from '../../../../../types';
 import { UseCase } from '../../../../../shared/domain/UseCase';
 import { Query } from '../../../../../shared/domain/bus/Query/Query';
+import { Ingredient } from '../../domain/Ingredient';
 
 @injectable()
 export class GetIngredientQueryHandler implements QueryHandler {
   id: string;
   topic = 'GetIngredientQuery';
-  private useCase: UseCase<Query, any>;
+  private useCase: UseCase<Query, Ingredient>;
 
-  constructor(@inject(CoreIngredientTypes.getIngredientUseCase) useCase: UseCase<Query, any>) {
+  constructor(@inject(CoreIngredientTypes.getIngredientUseCase) useCase: UseCase<Query, Ingredient>) {
     this.useCase = useCase;
     this.id = new Uuid().toString();
   }
 
-  handle(query: GetIngredientQuery) {
-    return this.useCase.execute(query);
+  handle(query: GetIngredientQuery): Promise<Ingredient> {
+    return this.useCase.execute(query) as Promise<Ingredient>;
   }
 }
 

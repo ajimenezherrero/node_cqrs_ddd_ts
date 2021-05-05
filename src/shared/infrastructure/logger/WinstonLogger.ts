@@ -1,14 +1,14 @@
 import winston from 'winston';
 
 class WinstonLogger {
-  instance: any;
+  instance?: winston.Logger;
   loggerLevel = 'debug';
 
   constructor(loggerLevel: string) {
     this.loggerLevel = loggerLevel;
   }
 
-  get logger() {
+  get logger(): winston.Logger {
     if (!this.instance) {
       this.instance = winston.createLogger({
         level: this.loggerLevel,

@@ -23,7 +23,7 @@ export class Bootstrap {
     });
   }
 
-  initLogger(context: interfaces.Context) {
+  initLogger(context: interfaces.Context): Logger {
     return new WinstonLogger(context.container.get<Config>(BootstrapTypes.Config).loggerLevel).logger;
   }
 }

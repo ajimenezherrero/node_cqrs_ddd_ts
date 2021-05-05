@@ -13,11 +13,11 @@ export class InMemoryCommandBus implements CommandBus {
     this.bus = new MessageBus();
   }
 
-  addSubscriber(subscriber: Subscriber) {
+  addSubscriber(subscriber: Subscriber): void {
     this.bus.addSubscriber(subscriber);
   }
 
-  dispatch(command: Command) {
+  dispatch(command: Command): void {
     try {
       this.bus.dispatch(command);
     } catch (error) {

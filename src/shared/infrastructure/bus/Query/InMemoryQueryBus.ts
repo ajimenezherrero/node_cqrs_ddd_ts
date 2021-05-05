@@ -14,11 +14,11 @@ export class InMemoryQueryBus implements QueryBus {
     this.bus = new MessageBus();
   }
 
-  addSubscriber(subscriber: Subscriber) {
+  addSubscriber(subscriber: Subscriber): void {
     this.bus.addSubscriber(subscriber);
   }
 
-  async ask(query: Query) {
+  async ask(query: Query): Promise<void> {
     return await this.bus.dispatch(query);
   }
 }

@@ -18,13 +18,13 @@ export class IngredientPGRepository implements IngredientRepository {
     this.postgres = postgres;
   }
 
-  save(ingredient: Ingredient): Promise<void> {
+  save(): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  update(ingredient: Ingredient): Promise<void> {
+  update(): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  delete(ingredientId: Uuid): Promise<void> {
+  delete(): Promise<void> {
     throw new Error('Method not implemented.');
   }
   async findById(ingredientId: Uuid): Promise<Ingredient> {

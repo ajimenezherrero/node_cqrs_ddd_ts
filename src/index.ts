@@ -6,6 +6,7 @@ import IngredientModule from './core/cook-book/ingredient/module';
 import { Bootstrap } from './shared/infrastructure/bootstrap/Bootstrap';
 import Server from './shared/domain/Server';
 import { CoreIngredientTypes, PublicApiTypes } from './types';
+import { Module } from './shared/domain/Module';
 
 const start = async () => {
   try {
@@ -14,7 +15,7 @@ const start = async () => {
 
     ApplicationContainer.load(bootstrap.container, IngredientModule, PublicApiContainer);
 
-    ApplicationContainer.get<any>(CoreIngredientTypes.ingredientModule).init();
+    ApplicationContainer.get<Module>(CoreIngredientTypes.ingredientModule).init();
     ApplicationContainer.get<Server>(PublicApiTypes.publicApi).start();
   } catch (error) {
     process.exit(1);

@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { Pool } from 'pg';
+import { Pool, PoolConfig, QueryResult } from 'pg';
 import { Logger } from '../../logger/Logger';
 import { BootstrapTypes } from '../../../../types';
 import { Config } from '../../configuration/Config';
@@ -7,8 +7,8 @@ import { Config } from '../../configuration/Config';
 @injectable()
 export class Postgresql {
   logger: Logger;
-  configPg: object;
-  poolInstance: any;
+  configPg: PoolConfig;
+  poolInstance?: Pool;
 
   constructor(@inject(BootstrapTypes.Logger) logger: Logger, @inject(BootstrapTypes.Config) config: Config) {
     this.logger = logger;
@@ -17,7 +17,7 @@ export class Postgresql {
     this.configPg = config.postgres;
   }
 
-  getPool() {
+  getPool(): Pool {
     if (!this.poolInstance) {
       this.logger.info('Creating a Pool for Postgresql');
 
@@ -27,7 +27,7 @@ export class Postgresql {
     return this.poolInstance;
   }
 
-  async query(queryString: string, values: string[]) {
+  async query(queryString: string, values: string[]): Promise<QueryResult> {
     const pool = this.getPool();
     const client = await pool.connect();
 

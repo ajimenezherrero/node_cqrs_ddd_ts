@@ -23,7 +23,7 @@ export class Ingredient extends AggregateRoot<IngredientProps> {
     return this.description;
   }
 
-  responseView() {
+  responseView(): unknown {
     return {
       id: this.id,
       name: this.props.name,

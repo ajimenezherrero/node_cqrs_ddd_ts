@@ -3,5 +3,5 @@ import { EventBus } from '../EventBus/EventBus';
 
 export interface QueryBus {
   bus: EventBus;
-  ask(Query: Query): Promise<any>;
+  ask(Query: Query): unknown;
 }
