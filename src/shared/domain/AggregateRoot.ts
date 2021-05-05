@@ -11,7 +11,7 @@ export abstract class AggregateRoot<T> extends Entity<T> {
 
   public pullDomainEvents(): IDomainEvent[] {
       const domainEvents = this.domainEvents;
-      
+
       this.domainEvents = [];
 
       return domainEvents;

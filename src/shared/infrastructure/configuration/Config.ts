@@ -1,35 +1,50 @@
-import { injectable } from "inversify";
-import 'reflect-metadata';
+const {
+  POSTGRES_USER,
+  POSTGRES_HOST,
+  POSTGRES_DB,
+  POSTGRES_PASSWORD,
+  POSTGRES_PORT,
+  LOGGER_LEVEL,
+  APP_PORT,
+  BACKOFFICE_PORT,
+} = process.env;
 
-const { PG_USER, PG_HOST, PG_DATABASE, PG_PASSWORD, PG_PORT, LOGGER_LEVEL } = process.env;
+type applicationConfig = {
+  port: number;
+};
 
-export interface configType {
-  loggerLevel: string
+export type Config = {
+  applications: {
+    backoffice: applicationConfig;
+    apiRest: applicationConfig;
+  };
+  loggerLevel: string;
   postgres: {
-    database: string,
-    host: string,
-    max: number,
-    password: string,
-    port: number,
-    user: string,
-  }
-}
+    database: string;
+    host: string;
+    max: number;
+    password: string;
+    port: number;
+    user: string;
+  };
+};
 
-@injectable()
-export class Config {
-  config: configType;
-
-  constructor() {
-    this.config = {
-      loggerLevel: LOGGER_LEVEL || '',
-      postgres: {
-        database: PG_DATABASE || '',
-        host: PG_HOST || 'postgres',
-        max: 10,
-        password: PG_PASSWORD || '',
-        port: Number(PG_PORT) || 5432,
-        user: PG_USER || 'postgres',
-      }
-    };
-  }
-}
+export const configuration: Config = {
+  applications: {
+    apiRest: {
+      port: Number(APP_PORT),
+    },
+    backoffice: {
+      port: Number(BACKOFFICE_PORT),
+    },
+  },
+  loggerLevel: LOGGER_LEVEL || "",
+  postgres: {
+    database: POSTGRES_DB || "",
+    host: POSTGRES_HOST || "postgres",
+    max: 10,
+    password: POSTGRES_PASSWORD || "",
+    port: Number(POSTGRES_PORT) || 5432,
+    user: POSTGRES_USER || "postgres",
+  },
+};

@@ -1,9 +1,10 @@
-import { injectable } from 'inversify';
-import { QueryBus } from '../../../domain/bus/Query/QueryBus';
-import { Query } from '../../../domain/bus/Query/Query';
-import { InMemoryMessageBus as MessageBus } from '../MessageBus/InMemoryMessageBus';
-import { EventBus } from '../../../domain/bus/EventBus/EventBus';
-import { Subscriber } from '../../../domain/bus/EventBus/Subscriber';
+import { injectable } from "inversify";
+
+import { EventBus } from "../../../domain/bus/EventBus/EventBus";
+import { Subscriber } from "../../../domain/bus/EventBus/Subscriber";
+import { Query } from "../../../domain/bus/Query/Query";
+import { QueryBus } from "../../../domain/bus/Query/QueryBus";
+import { InMemoryMessageBus as MessageBus } from "../MessageBus/InMemoryMessageBus";
 
 @injectable()
 export class InMemoryQueryBus implements QueryBus {
@@ -14,16 +15,10 @@ export class InMemoryQueryBus implements QueryBus {
   }
 
   addSubscriber(subscriber: Subscriber) {
-    this.bus.addSubscriber(subscriber)
+    this.bus.addSubscriber(subscriber);
   }
 
   async ask(query: Query) {
-    try {
-      const response = await this.bus.dispatch(query);
-
-      return response;
-    } catch (error) {
-      throw error;
-    }
+    return await this.bus.dispatch(query);
   }
 }

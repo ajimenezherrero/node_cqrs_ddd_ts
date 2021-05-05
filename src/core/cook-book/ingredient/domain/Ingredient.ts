@@ -1,5 +1,5 @@
 import { Uuid } from "../../../../shared/domain/value-objects/Uuid";
-import { AggregateRoot } from '../../../../shared/domain/AggregateRoot';
+import { AggregateRoot } from "../../../../shared/domain/AggregateRoot";
 
 interface IngredientProps {
   name: string;
@@ -7,8 +7,7 @@ interface IngredientProps {
 }
 
 export class Ingredient extends AggregateRoot<IngredientProps> {
-
-  private constructor (props: IngredientProps, id?: Uuid) {
+  constructor(props: IngredientProps, id?: Uuid) {
     super(props, id);
   }
 

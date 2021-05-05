@@ -1,3 +1,3 @@
 import { Event } from "../EventBus/Event";
 
-export interface Command extends Event {};
+export type Command = Event;

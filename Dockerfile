@@ -20,6 +20,6 @@ FROM dependencies AS builder
 RUN yarn build
 
 FROM base AS release
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/build ./build
 COPY --from=builder /app/prod_node_modules ./node_modules
 CMD yarn serve

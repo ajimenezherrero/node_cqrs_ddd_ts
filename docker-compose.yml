@@ -8,10 +8,13 @@ services:
       target: $TARGET
       args:
         NODE_ENV: $NODE_ENV
+    env_file:
+      - .env
     volumes:
       - ./src:/app/src
     ports:
-      - $PORT:$PORT
+      - $APP_PORT:$APP_PORT
+      - $BACKOFFICE_PORT:$BACKOFFICE_PORT
     depends_on:
       db:
         condition: service_healthy

@@ -1,23 +1,23 @@
-import { inject } from "inversify";
+import { inject, injectable } from "inversify";
 import { IngredientRepository } from "../../domain/IngredientRepository";
 import { Ingredient } from "../../domain/Ingredient";
 import { Uuid } from "../../../../../shared/domain/value-objects/Uuid";
-import { TYPES } from "../../../../../shared/infrastructure/bootstrap/Types";
+import { BootstrapTypes } from "../../../../../types";
 import { Postgresql } from "../../../../../shared/infrastructure/persistence/Postgres/Postgresql";
 import { Logger } from "../../../../../shared/infrastructure/logger/Logger";
 
-
+@injectable()
 export class IngredientPGRepository implements IngredientRepository {
-  logger: Logger
+  logger: Logger;
   postgres: Postgresql;
 
-  constructor(@inject(TYPES.Postgres) postgres: Postgresql, @inject(TYPES.Logger) logger: Logger ) {
+  constructor(@inject(BootstrapTypes.Postgres) postgres: Postgresql, @inject(BootstrapTypes.Logger) logger: Logger) {
     this.logger = logger;
     this.logger.info(`${IngredientPGRepository.name} constructor`);
 
     this.postgres = postgres;
   }
-  
+
   save(ingredient: Ingredient): Promise<void> {
     throw new Error("Method not implemented.");
   }
@@ -27,11 +27,15 @@ export class IngredientPGRepository implements IngredientRepository {
   delete(ingredientId: Uuid): Promise<void> {
     throw new Error("Method not implemented.");
   }
-  findById(ingredientId: Uuid): Ingredient {
-    throw new Error("Method not implemented.");
+  async findById(ingredientId: Uuid): Promise<Ingredient> {
+    const query = `SELECT id, name, description FROM ingredient WHERE id = $1`;
+    const {
+      rows: [{ name, description, id }],
+    } = await this.postgres.query(query, [ingredientId.toString()]);
+
+    return new Ingredient({ name, description }, id);
   }
   findAll(): Ingredient[] {
     throw new Error("Method not implemented.");
   }
-  
 }

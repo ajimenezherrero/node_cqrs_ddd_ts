@@ -6,7 +6,6 @@
     "types": ["node", "reflect-metadata"],
     "allowJs": true,
     "outDir": "build",
-    "rootDir": "src",
     "strict": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
@@ -15,5 +14,11 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
-  }
+  },
+  "include":[ 
+    "src/**/*"
+  ],
+  "exclude":[ 
+      "node_modules"
+  ]
 }

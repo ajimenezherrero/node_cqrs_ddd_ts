@@ -1,29 +1,31 @@
-import { Container } from 'inversify';
-import { Config } from '../configuration/Config';
-import { Logger } from '../logger/Logger';
-import { TYPES } from './Types';
-import { Postgresql } from '../persistence/Postgres/Postgresql';
-import { InMemoryCommandBus } from '../bus/Command/InMemoryCommandBus';
-import { InMemoryQueryBus } from '../bus/Query/InMemoryQueryBus';
+import { ContainerModule, interfaces } from "inversify";
 
-import { GetIngredientQueryHandler } from '../../../core/cook-book/ingredient/application/Read/GetIngredientQueryHandler';
-import { GetIngredientUseCase } from '../../../core/cook-book/ingredient/application/Read/GetIngredientUseCase';
+import { BootstrapTypes } from "../../../types";
+import { QueryBus } from "../../domain/bus/Query/QueryBus";
+import { CommandBus } from "../../domain/bus/Command/CommandBus";
+import { InMemoryCommandBus } from "../bus/Command/InMemoryCommandBus";
+import { InMemoryQueryBus } from "../bus/Query/InMemoryQueryBus";
+import { configuration, Config } from "../configuration/Config";
+import { Logger } from "../logger/Logger";
+import WinstonLogger from "../logger/WinstonLogger";
+import { Postgresql } from "../persistence/Postgres/Postgresql";
+
 export class Bootstrap {
-  container: Container;
-  public queryBus: InMemoryQueryBus;
+  container: ContainerModule;
 
   constructor() {
-    this.container = new Container();
-    this.queryBus = new InMemoryQueryBus();
-    this.container.bind<Config>(TYPES.Config).to(Config);
-    this.container.bind<Logger>(TYPES.Logger).to(Logger);
-    this.container.bind<Postgresql>(TYPES.Postgres).to(Postgresql);
-    this.container.bind<InMemoryCommandBus>(TYPES.InMemoryCommandBus).to(InMemoryCommandBus);
-
-    this.initBuses();
+    this.container = new ContainerModule((bind: interfaces.Bind) => {
+      bind<Config>(BootstrapTypes.Config).toConstantValue(configuration);
+      bind<Logger>(BootstrapTypes.Logger).toDynamicValue(this.initLogger);
+      bind<Postgresql>(BootstrapTypes.Postgres).to(Postgresql);
+      bind<CommandBus>(BootstrapTypes.CommandBus).to(InMemoryCommandBus);
+      bind<QueryBus>(BootstrapTypes.QueryBus).to(InMemoryQueryBus).inSingletonScope();
+    });
   }
 
-  initBuses() {
-    this.queryBus.addSubscriber(new GetIngredientQueryHandler(new GetIngredientUseCase()))
-  }  
+  initLogger(context: interfaces.Context) {
+    return new WinstonLogger(
+      context.container.get<Config>(BootstrapTypes.Config).loggerLevel
+    ).logger;
+  }
 }
