@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 import { QueryBus } from '../../../../shared/domain/bus/Query/QueryBus';
 import Controller from '../../../../shared/domain/Controller';
@@ -14,6 +14,7 @@ import { CommandBus } from '../../../../shared/domain/bus/Command/CommandBus';
 class IngredientController implements Controller {
   queryBus: QueryBus;
   commandBus: CommandBus;
+
   constructor(
     @inject(BootstrapTypes.QueryBus) queryBus: QueryBus,
     @inject(BootstrapTypes.CommandBus) commandBus: CommandBus,
@@ -22,13 +23,17 @@ class IngredientController implements Controller {
     this.commandBus = commandBus;
   }
 
-  show = async (req: Request, res: Response): Promise<void> => {
+  show = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { id } = req.params;
     const query = new GetIngredientQuery(new Uuid(id));
 
-    const ingredient = (await this.queryBus.ask(query)) as Ingredient;
-
-    res.json(ingredient.responseView());
+    try {
+      const ingredient = (await this.queryBus.ask(query)) as Ingredient;
+      
+      res.json(ingredient.responseView());
+    } catch (error) {
+      next(error);
+    }
   };
 
   create = (req: Request, res: Response): void => {
