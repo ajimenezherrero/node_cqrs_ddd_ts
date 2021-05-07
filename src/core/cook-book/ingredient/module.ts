@@ -16,6 +16,7 @@ import { CommandHandler } from '../../../shared/domain/bus/Command/CommandHandle
 import { Command } from '../../../shared/domain/bus/Command/Command';
 import { CreateIngredientUseCase } from './application/Create/CreateIngredientUseCase';
 import CreateIngredientCommandHandler from './application/Create/CreateIngredientCommandHandler';
+import IngredientFinder from '../ingredient/domain/IngredientFinder';
 
 @injectable()
 export class IngredientModule implements Module {
