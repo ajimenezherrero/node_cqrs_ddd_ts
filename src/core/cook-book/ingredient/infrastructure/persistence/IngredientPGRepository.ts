@@ -23,20 +23,24 @@ export class IngredientPGRepository implements IngredientRepository {
     const values = [ingredient.id.toString(), ingredient.name, ingredient.description];
     this.postgres.query(query, values);
   }
+
   update(): Promise<void> {
     throw new Error('Method not implemented.');
   }
+
   delete(): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  async findById(ingredientId: Uuid): Promise<Ingredient> {
-    const query = `SELECT id, name, description FROM ingredient WHERE id = $1`;
-    const {
-      rows: [{ name, description, id }],
-    } = await this.postgres.query(query, [ingredientId.toString()]);
 
-    return new Ingredient({ name, description }, id);
+  async findById(ingredientId: Uuid):  Promise<Ingredient|undefined> {
+    const query = `SELECT id, name, description FROM ingredient WHERE id = $1`;
+    const { rows } = await this.postgres.query(query, [ingredientId.toString()]);
+
+    if(rows[0]) {
+      return new Ingredient(rows[0], ingredientId);
+    }
   }
+
   findAll(): Ingredient[] {
     throw new Error('Method not implemented.');
   }

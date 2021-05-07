@@ -9,12 +9,14 @@ import { Config } from '../../../shared/infrastructure/configuration/Config';
 import { Logger } from '../../../shared/infrastructure/logger/Logger';
 import Server from '../../../shared/domain/Server';
 
+import ExpressServer, { Router } from '../../../shared/infrastructure/http/Express/ExpressServer';
 @injectable()
 class PublicApi implements Server {
-  server: express.Express;
+  serverName = 'Recipe App';
+  server: ExpressServer;
   config: Config;
   logger: Logger;
-  router: express.Router;
+  routers: Array<Router>;
 
   constructor(
     @inject(BootstrapTypes.Logger) logger: Logger,
@@ -23,26 +25,20 @@ class PublicApi implements Server {
   ) {
     this.config = config;
     this.logger = logger;
-    this.router = router;
-    this.server = express();
-  }
-
-  initRoutes(): void {
-    this.server.get('/', (req, res) => {
-      res.send('Recipe App is running...').end();
-    });
-
-    this.server.use('/ingredients', this.router);
+    this.routers = [{
+      path: '/ingredients',
+      router
+    }];
+    this.server = new ExpressServer(
+      this.routers,
+      this.logger,
+      this.config.applications.apiRest.port,
+      this.serverName,
+    );
   }
 
   start(): void {
-    this.server.use(express.json());
-    this.initRoutes();
-
-    this.server.listen(this.config.applications.apiRest.port, () => {
-      this.logger.info(`Application server listen on port ${this.config.applications.apiRest.port}...`);
-      this.logger.info('= = = = = = = = = = = = = = = = = = = = =');
-    });
+    this.server.start();
   }
 }
 

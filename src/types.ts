@@ -15,6 +15,7 @@ export const CoreIngredientTypes = {
   ingredientCommandHandlers: Symbol.for('ingredientCommandHandlers'),
   getIngredientUseCase: Symbol.for('getIngredientUseCase'),
   createIngredientUseCase: Symbol.for('createIngredientUseCase'),
+  ingredientFinder: Symbol.for('ingredientFinder'),
 };
 
 export const PublicApiTypes = {
