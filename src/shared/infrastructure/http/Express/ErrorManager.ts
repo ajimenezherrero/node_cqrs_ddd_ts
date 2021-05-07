@@ -1,5 +1,5 @@
-import { ErrorRequestHandler, Request, Response } from 'express';
-import { Logger } from "../../logger/Logger";
+import { ErrorRequestHandler, Request, Response, NextFunction } from 'express';
+import { Logger } from '../../logger/Logger';
 
 interface GenericError extends Error {
   statusCode: number;
@@ -13,12 +13,13 @@ class ErrorManager {
   }
 
   errorManagement(): ErrorRequestHandler {
-    return (err: GenericError, req: Request, res: Response): void => {
+    return (err: GenericError, req: Request, res: Response, next: NextFunction): void => {
       const { statusCode = 500, message = '' } = err;
 
       this.logger.error(message);
 
       res.status(statusCode).json({ error: message });
+      next();
     };
   }
 }

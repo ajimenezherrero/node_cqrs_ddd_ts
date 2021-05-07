@@ -32,12 +32,21 @@ export class IngredientPGRepository implements IngredientRepository {
     throw new Error('Method not implemented.');
   }
 
-  async findById(ingredientId: Uuid):  Promise<Ingredient|undefined> {
+  async findById(ingredientId: Uuid): Promise<Ingredient | undefined> {
     const query = `SELECT id, name, description FROM ingredient WHERE id = $1`;
     const { rows } = await this.postgres.query(query, [ingredientId.toString()]);
 
-    if(rows[0]) {
+    if (rows[0]) {
       return new Ingredient(rows[0], ingredientId);
+    }
+  }
+
+  async findByName(name: string): Promise<Ingredient | undefined> {
+    const query = `SELECT id, name, description FROM ingredient WHERE name = $1`;
+    const { rows } = await this.postgres.query(query, [name]);
+
+    if (rows[0]) {
+      return new Ingredient(rows[0], rows[0].id);
     }
   }
 
