@@ -19,7 +19,7 @@ export class InMemoryCommandBus implements CommandBus {
 
   dispatch(command: Command): void {
     try {
-      this.bus.dispatch(command);
+      return this.bus.dispatch(command);
     } catch (error) {
       throw error;
     }

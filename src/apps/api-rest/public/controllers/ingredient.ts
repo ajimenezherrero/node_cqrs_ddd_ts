@@ -29,19 +29,22 @@ class IngredientController implements Controller {
 
     try {
       const ingredient = (await this.queryBus.ask(query)) as Ingredient;
-      
+
       res.json(ingredient.responseView());
     } catch (error) {
       next(error);
     }
   };
 
-  create = (req: Request, res: Response): void => {
+  create = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const command = new CreateIngredientCommand(req.body);
+    try {
+      await this.commandBus.dispatch(command);
 
-    this.commandBus.dispatch(command);
-
-    res.status(202).end();
+      res.status(202).end();
+    } catch (error) {
+      next(error);
+    }
   };
 
   list(): void {
