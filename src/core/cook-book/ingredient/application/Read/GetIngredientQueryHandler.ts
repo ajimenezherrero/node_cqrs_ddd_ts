@@ -13,9 +13,9 @@ import IngredientResponse from '../../domain/IngredientResponse';
 export class GetIngredientQueryHandler implements QueryHandler {
   id: string;
   topic = 'GetIngredientQuery';
-  private useCase: UseCase<Uuid, Ingredient>;
+  private useCase: UseCase<Ingredient>;
 
-  constructor(@inject(CoreIngredientTypes.getIngredientUseCase) useCase: UseCase<Uuid, Ingredient>) {
+  constructor(@inject(CoreIngredientTypes.getIngredientUseCase) useCase: UseCase<Ingredient>) {
     this.useCase = useCase;
     this.id = new Uuid().toString();
   }

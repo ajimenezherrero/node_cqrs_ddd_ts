@@ -12,11 +12,9 @@ import { Module } from '../../../shared/domain/Module';
 import { Ingredient } from './domain/Ingredient';
 import { CommandBus } from '../../../shared/domain/bus/Command/CommandBus';
 import { CommandHandler } from '../../../shared/domain/bus/Command/CommandHandler';
-import { Command } from '../../../shared/domain/bus/Command/Command';
 import { CreateIngredient } from './application/Create/CreateIngredient';
 import CreateIngredientCommandHandler from './application/Create/CreateIngredientCommandHandler';
 import IngredientFinder from '../ingredient/domain/IngredientFinder';
-import { Uuid } from '../../../shared/domain/value-objects/Uuid';
 
 @injectable()
 export class IngredientModule implements Module {
@@ -65,8 +63,8 @@ const containerModule = new ContainerModule((bind: interfaces.Bind) => {
   bind<QueryHandler[]>(CoreIngredientTypes.ingredientQueryHandlers).toDynamicValue(queryHandlers);
   bind<CommandHandler>(CoreIngredientTypes.createIngredientCommandHandler).to(CreateIngredientCommandHandler);
   bind<CommandHandler[]>(CoreIngredientTypes.ingredientCommandHandlers).toDynamicValue(commandHandlers);
-  bind<UseCase<Uuid, Ingredient>>(CoreIngredientTypes.getIngredientUseCase).to(GetIngredient);
-  bind<UseCase<Command, Ingredient>>(CoreIngredientTypes.createIngredientUseCase).to(CreateIngredient);
+  bind<UseCase<Ingredient>>(CoreIngredientTypes.getIngredientUseCase).to(GetIngredient);
+  bind<UseCase<Ingredient>>(CoreIngredientTypes.createIngredientUseCase).to(CreateIngredient);
   bind<IngredientFinder>(CoreIngredientTypes.ingredientFinder).to(IngredientFinder);
 });
 

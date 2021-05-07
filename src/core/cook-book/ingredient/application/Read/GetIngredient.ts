@@ -7,7 +7,7 @@ import IngredientFinder from '../../domain/IngredientFinder';
 import { Uuid } from '../../../../../shared/domain/value-objects/Uuid';
 
 @injectable()
-export class GetIngredient implements UseCase<Uuid, Ingredient> {
+export class GetIngredient implements UseCase<Ingredient> {
   finder: IngredientFinder;
   constructor(@inject(CoreIngredientTypes.ingredientFinder) finder: IngredientFinder) {
     this.finder = finder;

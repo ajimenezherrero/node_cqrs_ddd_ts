@@ -1,3 +1,3 @@
-export interface UseCase<T, IResponse> {
-  execute(args: T): Promise<IResponse> | IResponse;
+export interface UseCase<IResponse> {
+  execute(...args: unknown[]): Promise<IResponse> | IResponse;
 }
