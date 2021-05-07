@@ -6,22 +6,24 @@ import { GetIngredientQuery } from './GetIngredientQuery';
 
 import { CoreIngredientTypes } from '../../../../../types';
 import { UseCase } from '../../../../../shared/domain/UseCase';
-import { Query } from '../../../../../shared/domain/bus/Query/Query';
 import { Ingredient } from '../../domain/Ingredient';
+import IngredientResponse from '../../domain/IngredientResponse';
 
 @injectable()
 export class GetIngredientQueryHandler implements QueryHandler {
   id: string;
   topic = 'GetIngredientQuery';
-  private useCase: UseCase<Query, Ingredient>;
+  private useCase: UseCase<Uuid, Ingredient>;
 
-  constructor(@inject(CoreIngredientTypes.getIngredientUseCase) useCase: UseCase<Query, Ingredient>) {
+  constructor(@inject(CoreIngredientTypes.getIngredientUseCase) useCase: UseCase<Uuid, Ingredient>) {
     this.useCase = useCase;
     this.id = new Uuid().toString();
   }
 
-  handle(query: GetIngredientQuery): Promise<Ingredient> {
-    return this.useCase.execute(query) as Promise<Ingredient>;
+  async handle(query: GetIngredientQuery): Promise<IngredientResponse> {
+    const ingredient = await this.useCase.execute(query.id);
+
+    return ingredient.responseView();
   }
 }
 

@@ -1,3 +1,3 @@
-export interface UseCase<IRequest, IResponse> {
-  execute(request?: IRequest): Promise<IResponse> | IResponse;
+export interface UseCase<T, IResponse> {
+  execute(args: T): Promise<IResponse> | IResponse;
 }

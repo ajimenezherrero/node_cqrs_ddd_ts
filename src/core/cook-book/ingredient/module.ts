@@ -5,7 +5,6 @@ import { QueryHandler } from '../../../shared/domain/bus/Query/QueryHandler';
 import GetIngredientQueryHandler from './application/Read/GetIngredientQueryHandler';
 import { GetIngredient } from './application/Read/GetIngredient';
 import { UseCase } from '../../../shared/domain/UseCase';
-import { Query } from '../../../shared/domain/bus/Query/Query';
 import { QueryBus } from '../../../shared/domain/bus/Query/QueryBus';
 
 import { BootstrapTypes, CoreIngredientTypes } from '../../../types';
@@ -17,6 +16,7 @@ import { Command } from '../../../shared/domain/bus/Command/Command';
 import { CreateIngredient } from './application/Create/CreateIngredient';
 import CreateIngredientCommandHandler from './application/Create/CreateIngredientCommandHandler';
 import IngredientFinder from '../ingredient/domain/IngredientFinder';
+import { Uuid } from '../../../shared/domain/value-objects/Uuid';
 
 @injectable()
 export class IngredientModule implements Module {
@@ -65,7 +65,7 @@ const containerModule = new ContainerModule((bind: interfaces.Bind) => {
   bind<QueryHandler[]>(CoreIngredientTypes.ingredientQueryHandlers).toDynamicValue(queryHandlers);
   bind<CommandHandler>(CoreIngredientTypes.createIngredientCommandHandler).to(CreateIngredientCommandHandler);
   bind<CommandHandler[]>(CoreIngredientTypes.ingredientCommandHandlers).toDynamicValue(commandHandlers);
-  bind<UseCase<Query, Ingredient>>(CoreIngredientTypes.getIngredientUseCase).to(GetIngredient);
+  bind<UseCase<Uuid, Ingredient>>(CoreIngredientTypes.getIngredientUseCase).to(GetIngredient);
   bind<UseCase<Command, Ingredient>>(CoreIngredientTypes.createIngredientUseCase).to(CreateIngredient);
   bind<IngredientFinder>(CoreIngredientTypes.ingredientFinder).to(IngredientFinder);
 });

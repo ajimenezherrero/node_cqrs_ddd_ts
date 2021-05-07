@@ -6,9 +6,9 @@ import Controller from '../../../../shared/domain/Controller';
 import { BootstrapTypes } from '../../../../types';
 import { GetIngredientQuery } from '../../../../core/cook-book/ingredient/application/Read/GetIngredientQuery';
 import { Uuid } from '../../../../shared/domain/value-objects/Uuid';
-import { Ingredient } from '../../../../core/cook-book/ingredient/domain/Ingredient';
 import { CreateIngredientCommand } from '../../../../core/cook-book/ingredient/application/Create/CreateIngredientCommand';
 import { CommandBus } from '../../../../shared/domain/bus/Command/CommandBus';
+import IngredientResponse from '../../../../core/cook-book/ingredient/domain/IngredientResponse';
 
 @injectable()
 class IngredientController implements Controller {
@@ -28,9 +28,9 @@ class IngredientController implements Controller {
     const query = new GetIngredientQuery(new Uuid(id));
 
     try {
-      const ingredient = (await this.queryBus.ask(query)) as Ingredient;
+      const IngredientResponse = (await this.queryBus.ask(query)) as IngredientResponse;
 
-      res.json(ingredient.responseView());
+      res.json(IngredientResponse);
     } catch (error) {
       next(error);
     }
