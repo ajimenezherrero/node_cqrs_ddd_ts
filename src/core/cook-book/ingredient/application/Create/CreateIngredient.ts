@@ -4,21 +4,21 @@ import { UseCase } from '../../../../../shared/domain/UseCase';
 import { IngredientRepository } from '../../domain/IngredientRepository';
 import { CoreIngredientTypes } from '../../../../../types';
 import { Ingredient } from '../../domain/Ingredient';
-import { CreateIngredientCommand } from './CreateIngredientCommand';
 import IngredientDuplicatedError from '../../domain/IngredientDuplicatedError';
+import { Uuid } from '../../../../../shared/domain/value-objects/Uuid';
 
 @injectable()
-export class CreateIngredient implements UseCase<CreateIngredientCommand, Ingredient> {
+export class CreateIngredient implements UseCase<Ingredient> {
   repository: IngredientRepository;
   constructor(@inject(CoreIngredientTypes.ingredientRepository) repository: IngredientRepository) {
     this.repository = repository;
   }
 
-  async execute(request: CreateIngredientCommand): Promise<Ingredient> {
-    if (await this.repository.findByName(request.body.name)) {
+  async execute(id: Uuid, name: string, description: string): Promise<Ingredient> {
+    if (await this.repository.findByName(name)) {
       throw new IngredientDuplicatedError();
     }
-    const ingredient = new Ingredient(request.body);
+    const ingredient = new Ingredient({ name, description }, id);
 
     this.repository.save(ingredient);
 
