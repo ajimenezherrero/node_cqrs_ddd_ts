@@ -1,0 +1,2 @@
+DROP TYPE IF EXISTS difficulty;
+DROP TABLE IF EXISTS recipe;

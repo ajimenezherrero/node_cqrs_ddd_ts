@@ -42,7 +42,7 @@ build: ## Builds the docker image
 .PHONY: build
 
 start: ## Starts the application
-	docker-compose up --build
+	docker-compose up -d
 .PHONY: start
 
 restart: ## Restarts the application
@@ -68,5 +68,10 @@ create-docker-network: ## Creates the docker network
 .PHONY: create-docker-network
 
 db-migrate: ## Update db schema.
+	docker-compose exec recipe-app yarn migrate:up
+.PHONY: db-migrate
+
+db-reset: ## Update db schema.
+	docker-compose exec recipe-app yarn migrate:down
 	docker-compose exec recipe-app yarn migrate:up
 .PHONY: db-migrate

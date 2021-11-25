@@ -8,7 +8,8 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node build/index.js",
-    "migrate:up": "db-migrate up:all -e default"
+    "migrate:up": "db-migrate up:all -e local",
+    "migrate:down": "db-migrate reset -e local"
   },
   "keywords": [],
   "author": "",
