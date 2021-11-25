@@ -27,7 +27,7 @@ export class Postgresql {
     return this.poolInstance;
   }
 
-  async query(queryString: string, values: string[]): Promise<QueryResult> {
+  async query(queryString: string, values?: string[]): Promise<QueryResult> {
     const pool = this.getPool();
     const client = await pool.connect();
 

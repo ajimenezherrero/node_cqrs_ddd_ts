@@ -18,6 +18,17 @@ export const CoreIngredientTypes = {
   ingredientFinder: Symbol.for('ingredientFinder'),
 };
 
+export const CoreRecipeTypes = {
+  recipeModule: Symbol.for('recipeModule'),
+  recipeRepository: Symbol.for('recipeRepository'),
+  recipeFinder: Symbol.for('recipeFinder'),
+  recipeQueryHandlers: Symbol.for('recipeQueryHandlers'),
+  getAllRecipesQueryHandler: Symbol.for('getAllRecipesQueryHandler'),
+  getFullRecipeQueryHandler: Symbol.for('getFullRecipeQueryHandler'),
+  getAllRecipesUseCase: Symbol.for('getAllRecipesUseCase'),
+  getFullRecipeUseCase: Symbol.for('getFullRecipeUseCase'),
+};
+
 export const PublicApiTypes = {
   publicApi: Symbol.for('PublicApi'),
   ingredientController: Symbol.for('IngredientController'),
