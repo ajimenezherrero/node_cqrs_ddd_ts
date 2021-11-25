@@ -4,11 +4,11 @@ import { Request, Response, NextFunction } from 'express';
 import { QueryBus } from '../../../../shared/domain/bus/Query/QueryBus';
 import Controller from '../../../../shared/domain/Controller';
 import { BootstrapTypes } from '../../../../types';
-import { GetIngredientQuery } from '../../../../core/cook-book/ingredient/application/Read/GetIngredientQuery';
+import { GetIngredientQuery } from '../../../../core/recipesDomain/ingredient/application/Read/GetIngredientQuery';
 import { Uuid } from '../../../../shared/domain/value-objects/Uuid';
-import { CreateIngredientCommand } from '../../../../core/cook-book/ingredient/application/Create/CreateIngredientCommand';
+import { CreateIngredientCommand } from '../../../../core/recipesDomain/ingredient/application/Create/CreateIngredientCommand';
 import { CommandBus } from '../../../../shared/domain/bus/Command/CommandBus';
-import IngredientResponse from '../../../../core/cook-book/ingredient/domain/IngredientResponse';
+import IngredientResponse from '../../../../core/recipesDomain/ingredient/domain/IngredientResponse';
 
 @injectable()
 class IngredientController implements Controller {
