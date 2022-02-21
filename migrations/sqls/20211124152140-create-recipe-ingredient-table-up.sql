@@ -4,6 +4,6 @@ CREATE TABLE recipe_ingredient (
   ingredient_id uuid,
   measurement_id uuid,
   amount real,
-  created_at TIMESTAMP NOT NULL,
-  updated_at TIMESTAMP NOT NULL
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );

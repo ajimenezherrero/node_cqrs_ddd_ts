@@ -8,6 +8,6 @@ CREATE TABLE recipe (
   difficulty difficulty,
   categories uuid[],
   creator_id uuid NOT NULL,
-  created_at TIMESTAMP NOT NULL,
-  updated_at TIMESTAMP NOT NULL
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
