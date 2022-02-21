@@ -21,14 +21,21 @@ class PublicApi implements Server {
   constructor(
     @inject(BootstrapTypes.Logger) logger: Logger,
     @inject(BootstrapTypes.Config) config: Config,
-    @inject(PublicApiTypes.ingredientRouter) router: express.Router,
+    @inject(PublicApiTypes.ingredientRouter) ingredientRouter: express.Router,
+    @inject(PublicApiTypes.recipeRouter) recipeRouter: express.Router,
   ) {
     this.config = config;
     this.logger = logger;
-    this.routers = [{
-      path: '/ingredients',
-      router
-    }];
+    this.routers = [
+      {
+        path: '/ingredients',
+        router: ingredientRouter,
+      },
+      {
+        path: '/recipes',
+        router: recipeRouter,
+      },
+    ];
     this.server = new ExpressServer(
       this.routers,
       this.logger,

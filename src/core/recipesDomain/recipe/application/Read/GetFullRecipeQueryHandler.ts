@@ -12,7 +12,7 @@ import { RecipeResponse } from '../../domain/RecipeResponse';
 @injectable()
 export class GetFullRecipeQueryHandler implements QueryHandler {
   id: string;
-  topic = 'GetRecipeQuery';
+  topic = 'GetFullRecipeQuery';
   private useCase: UseCase<Recipe>;
 
   constructor(@inject(CoreRecipeTypes.getFullRecipeUseCase) useCase: UseCase<Recipe>) {

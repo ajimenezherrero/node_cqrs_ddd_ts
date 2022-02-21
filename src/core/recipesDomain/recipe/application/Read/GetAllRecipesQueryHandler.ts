@@ -11,7 +11,7 @@ import { RecipeResponse } from '../../domain/RecipeResponse';
 @injectable()
 export class GetAllRecipesQueryHandler implements QueryHandler {
   id: string;
-  topic = 'GetRecipeQuery';
+  topic = 'GetAllRecipesQuery';
   private useCase: UseCase<Recipe[]>;
 
   constructor(@inject(CoreRecipeTypes.getAllRecipesUseCase) useCase: UseCase<Recipe[]>) {

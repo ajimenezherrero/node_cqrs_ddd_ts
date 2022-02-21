@@ -25,7 +25,7 @@ export class RecipePGRepository implements RecipeRepository {
     const { rows } = await this.postgres.query(query, [recipeId.toString()]);
 
     if (rows[0]) {
-      return new Recipe(rows[0], recipeId);
+      return Recipe.fromPrimitives(rows[0]);
     }
   }
 
@@ -34,6 +34,6 @@ export class RecipePGRepository implements RecipeRepository {
     const { rows } = await this.postgres.query(query);
 
     
-    return rows.map(row => new Recipe(row));
+    return rows.map(row => Recipe.fromPrimitives(row));
   }
 }

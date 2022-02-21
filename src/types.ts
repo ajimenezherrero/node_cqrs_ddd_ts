@@ -34,4 +34,7 @@ export const PublicApiTypes = {
   ingredientController: Symbol.for('IngredientController'),
   ingredientRouter: Symbol.for('IngredientRouter'),
   ingredientRepository: Symbol.for('IngredientRepository'),
+  recipeController: Symbol.for('RecipeController'),
+  recipeRouter: Symbol.for('RecipeRouter'),
+  recipeRepository: Symbol.for('RecipeRepository'),
 };

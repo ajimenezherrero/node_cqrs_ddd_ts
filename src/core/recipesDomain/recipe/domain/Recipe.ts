@@ -3,56 +3,49 @@ import { AggregateRoot } from '../../../../shared/domain/AggregateRoot';
 
 import { RecipeResponse } from './RecipeResponse';
 
-export interface RecipeProps {
-  name: string;
-  description: string;
-  duration: string;
-  difficulty: string; //TODO Enum
-  categories: string[]; //TODO Category[]
-  creatorId: Uuid;
-}
+export class Recipe extends AggregateRoot {
+  readonly id: Uuid;
+  readonly name: string;
+  readonly description: string;
+  readonly duration: string;
+  readonly difficulty: string;
+  readonly categories: string[];
+  readonly creatorId: Uuid;
+  
+  constructor(id: Uuid, name: string, description: string, duration: string, difficulty: string, categories: string[], creatorId: Uuid) {
+    super();
 
-export class Recipe extends AggregateRoot<RecipeProps> {
-  constructor(props: RecipeProps, id?: Uuid) {
-    super(props, id);
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.duration = duration;
+    this.difficulty = difficulty;
+    this.categories = categories;
+    this.creatorId = creatorId;
   }
 
-  get id(): Uuid {
-    return this._id;
-  }
-
-  get name(): string {
-    return this.props.name;
-  }
-
-  get description(): string {
-    return this.props.description;
-  }
-
-  get duration(): string {
-    return this.props.description;
-  }
-
-  get difficulty(): string {
-    return this.props.description;
-  }
-
-  get categories(): string {
-    return this.props.description;
-  }
-
-  get creatorId(): string {
-    return this.props.description;
+  static fromPrimitives(plainData: { id: string, name: string, description: string, duration: string, difficulty: string, categories: string[], creatorId: string }): Recipe {
+    return new Recipe(
+      new Uuid(plainData.id),
+      plainData.name,
+      plainData.description,
+      plainData.duration,
+      plainData.difficulty,
+      plainData.categories,
+      new Uuid(plainData.creatorId)
+    );
   }
 
   responseView(): RecipeResponse {
+    console.log("🚀 ~ file: Recipe.ts ~ line 52 ~ Recipe ~ responseView ~ this", this)
+    
     return {
       id: this.id.toString(),
-      name: this.props.name,
-      description: this.props.description,
-      duration: this.props.duration,
-      difficulty: this.props.difficulty,
-      categories: this.props.categories,
+      name: this.name,
+      description: this.description,
+      duration: this.duration,
+      difficulty: this.difficulty,
+      categories: this.categories,
       creatorId: this.creatorId.toString(),
     };
   }
