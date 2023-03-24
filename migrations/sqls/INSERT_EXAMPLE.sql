@@ -1,0 +1,1 @@
+INSERT INTO recipe(id, name, description, duration, difficulty, creator_id) VALUES('68ba4299-7fdc-4ebc-b5a7-0852ed696db3', 'Bacalao al pil pil', 'Bacalao al pil pil', '90 min', 'HIGH', '16d1d72b-bba3-4e55-9737-442c95eb85e2');
