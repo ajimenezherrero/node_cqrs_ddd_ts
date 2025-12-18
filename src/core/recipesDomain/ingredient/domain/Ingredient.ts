@@ -1,5 +1,4 @@
 import { Uuid } from '../../../../shared/domain/value-objects/Uuid';
-import { AggregateRoot } from '../../../../shared/domain/AggregateRoot';
 import IngredientResponse from './IngredientResponse';
 
 export interface IngredientProps {
@@ -7,28 +6,30 @@ export interface IngredientProps {
   description: string;
 }
 
-export class Ingredient extends AggregateRoot<IngredientProps> {
+export class Ingredient {
   constructor(props: IngredientProps, id?: Uuid) {
-    super(props, id);
+    console.log('🚀 ~ Ingredient ~ constructor ~ id:', id)
+    console.log('🚀 ~ Ingredient ~ constructor ~ props:', props)
+    
   }
 
   get id(): Uuid {
-    return this._id;
+    return new Uuid();
   }
 
   get name(): string {
-    return this.props.name;
+    return ''; // this.props.name;
   }
 
   get description(): string {
-    return this.props.description;
+    return ''; //this.props.description;
   }
 
   responseView(): IngredientResponse {
     return {
       id: this.id.toString(),
-      name: this.props.name,
-      description: this.props.description,
+      name: '', //this.props.name,
+      description: '', //this.props.description,
     };
   }
 }
